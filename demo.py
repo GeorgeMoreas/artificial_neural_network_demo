@@ -8,9 +8,10 @@ def a():
     for x in xrange(1, 5):
         syn0 = 2*np.random.random((3, 1))-1
         print syn0
-        plt.plot(syn0)
-        plt.draw()
-        plt.show(block=False)
+        #plt.plot(syn0)
+        #plt.draw()
+        #plt.show(block=False)
+
 
 def b():
     plt.cla()
@@ -20,9 +21,9 @@ def b():
         syn1 = 1+np.exp(-x)
         print syn0
         print syn1
-        plt.plot(x, syn0, 'bs', x, syn1, 'rs')
-        plt.draw()
-        plt.show(block=False)
+        #plt.plot(x, syn0, 'bs', x, syn1, 'rs')
+        #plt.draw()
+        #plt.show(block=False)
 
 
 # sigmoid function
@@ -37,21 +38,33 @@ def clearGraph():
     plt.clf()
 
 
-def c(iteration_count=10):
+def dotProd():
+    x = np.array([1, 2])
+    y = np.array([[0, 1, 2, 3],
+                  [0, 10, 20, 30]])
+    print np.dot(x, y)
+
+def c(iteration_count=10, randomness=False):
     clearGraph()
 
     # input dataset
-    X = np.array([[0, 0, 1],   # 0
-                  [0, 1, 1],   # 0
-                  [1, 0, 1],   # 1
-                  [1, 1, 1]])  # 1
+    if randomness:
+        X = np.array([[np.random.randint(0, 2), np.random.randint(0, 2), np.random.randint(0, 2)],   # 0
+                  [np.random.randint(0, 2), np.random.randint(0, 2), np.random.randint(0, 2)],   # 0
+                  [np.random.randint(0, 2), np.random.randint(0, 2), np.random.randint(0, 2)],   # 1
+                  [np.random.randint(0, 2), np.random.randint(0, 2), np.random.randint(0, 2)]])  # 1
+    else:
+        X = np.array([[0, 0, 1],   # 0
+                      [0, 1, 1],   # 0
+                      [1, 0, 1],   # 1
+                      [1, 1, 1]])  # 1
 
     # output dataset
     y = np.array([[0, 0, 1, 1]]).T
 
     # seed random numbers to make calculation
     # deterministic (just a good practice)
-    #np.random.seed(1)
+    #random.seed(1)
 
     # initialize weights randomly with mean 0
     syn0 = 2*np.random.random((3, 1)) - 1
@@ -82,6 +95,9 @@ def c(iteration_count=10):
 
         print "l0:"
         print l0
+        print ""
+        print "y:"
+        print y
         print ""
         print "l1:"
         print l1
@@ -116,5 +132,5 @@ def c(iteration_count=10):
 
         plt.draw()
 
-    print "Output After Training:"
-    print l1
+    print "Weight After Training:"
+    print syn0
